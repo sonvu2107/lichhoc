@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lịch Học Tháng 8 & 9</title>
+  <meta name="description" content="Lịch học tháng 8 và 9" />
+  <link rel="stylesheet" href="style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+  <div class="page-container">
+    <div class="month-selector-floating">
+      <button class="month-toggle active" data-month="8" onclick="switchMonth(8)">
+        <i class="fas fa-brain"></i>
+        Tháng 8
+      </button>
+      <button class="month-toggle" data-month="9" onclick="switchMonth(9)">
+        <i class="fas fa-leaf"></i>
+        Tháng 9
+      </button>
+    </div>
+
+    <div class="current-date-display">
+      <i class="fas fa-clock"></i>
+      <span id="currentDate"></span>
+    </div>
+
+    <div class="card-container">
+      <div class="card">
+        <div class="card-inner" id="cardInner">
+          <div class="card-front">
+            <div class="container">
+              <h1 class="title">
+                <i class="fas fa-calendar-alt"></i>
+                Lịch học tháng 8
+              </h1>
+
+              <div class="stats-display">
+                <div class="stat-item">
+                  <i class="fas fa-book"></i>
+                  <span id="totalClasses8">0 buổi học</span>
+                </div>
+                <div class="stat-item">
+                  <i class="fas fa-clock"></i>
+                  <span id="totalHours8">0 giờ</span>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label for="dayInput" class="label">
+                  <i class="fas fa-calendar-day"></i>
+                  Chọn ngày học
+                </label>
+                <div class="input-wrapper">
+                  <input type="number" id="dayInput" min="1" max="31" class="input" placeholder="Nhập ngày (1-31)" />
+                  <button class="input-btn" onclick="showSchedule(8)">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="quick-dates">
+                <span class="quick-dates-label">Ngày phổ biến:</span>
+                <div class="quick-date-buttons" id="quickDates8"></div>
+              </div>
+
+              <button class="button" onclick="showSchedule(8)">
+                <i class="fas fa-search"></i>
+                Xem lịch học
+              </button>
+
+              <!-- Results -->
+              <div id="scheduleOutput" class="schedule"></div>
+              <div id="errorMessage" class="error"></div>
+
+              <!-- Additional Actions -->
+              <div class="action-buttons">
+                <button class="action-btn" onclick="exportSchedule(8)">
+                  <i class="fas fa-download"></i>
+                  Xuất lịch
+                </button>
+                <button class="action-btn" onclick="showCalendarView(8)">
+                  <i class="fas fa-calendar"></i>
+                  Xem lịch
+                </button>
+                <button class="action-btn" onclick="showStatistics(8)">
+                  <i class="fas fa-chart-bar"></i>
+                  Thống kê
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-back">
+            <div class="container">
+              <h2 class="title">
+                <i class="fas fa-leaf"></i>
+                Lịch học tháng 9
+              </h2>
+
+              <div class="stats-display">
+                <div class="stat-item">
+                  <i class="fas fa-book"></i>
+                  <span id="totalClasses9">0 buổi học</span>
+                </div>
+                <div class="stat-item">
+                  <i class="fas fa-clock"></i>
+                  <span id="totalHours9">0 giờ</span>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label for="dayInput3" class="label">
+                  <i class="fas fa-calendar-day"></i>
+                  Chọn ngày học
+                </label>
+                <div class="input-wrapper">
+                  <input type="number" id="dayInput3" min="1" max="30" class="input" placeholder="Nhập ngày (1-30)" />
+                  <button class="input-btn" onclick="showSchedule(9)">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="quick-dates">
+                <span class="quick-dates-label">Ngày phổ biến:</span>
+                <div class="quick-date-buttons" id="quickDates9"></div>
+              </div>
+
+              <button class="button" onclick="showSchedule(9)">
+                <i class="fas fa-search"></i>
+                Xem lịch học
+              </button>
+
+              <div id="scheduleOutput3" class="schedule"></div>
+              <div id="errorMessage3" class="error"></div>
+
+              <div class="action-buttons">
+                <button class="action-btn" onclick="exportSchedule(9)">
+                  <i class="fas fa-download"></i>
+                  Xuất lịch
+                </button>
+                <button class="action-btn" onclick="showCalendarView(9)">
+                  <i class="fas fa-calendar"></i>
+                  Xem lịch
+                </button>
+                <button class="action-btn" onclick="showStatistics(9)">
+                  <i class="fas fa-chart-bar"></i>
+                  Thống kê
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-panel" id="settingsPanel">
+      <button class="settings-toggle" onclick="toggleSettings()">
+        <i class="fas fa-cog"></i>
+      </button>
+      <div class="settings-content">
+        <div class="setting-item">
+          <label class="setting-label">
+            <i class="fas fa-bell"></i>
+            Thông báo
+          </label>
+          <label class="toggle">
+            <input type="checkbox" id="notificationToggle" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-item">
+          <label class="setting-label">
+            <i class="fas fa-moon"></i>
+            Chế độ tối
+          </label>
+          <label class="toggle">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-item">
+          <label class="setting-label">
+            <i class="fas fa-volume-up"></i>
+            Âm thanh
+          </label>
+          <label class="toggle">
+            <input type="checkbox" id="soundToggle" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="calendarModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Lịch tháng <span id="modalMonthTitle"></span></h3>
+        <button class="modal-close" onclick="closeModal('calendarModal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="mini-calendar">
+          <div class="calendar-header">
+            <button class="calendar-nav" onclick="changeCalendarMonth(-1)">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <span id="calendarTitle">Tháng 8, 2025</span>
+            <button class="calendar-nav" onclick="changeCalendarMonth(1)">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+          <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="statisticsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Thống kê tháng <span id="statsMonthTitle"></span></h3>
+        <button class="modal-close" onclick="closeModal('statisticsModal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <i class="fas fa-graduation-cap"></i>
+            <div class="stat-info">
+              <span class="stat-number" id="totalSubjects">0</span>
+              <span class="stat-label">Môn học</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-clock"></i>
+            <div class="stat-info">
+              <span class="stat-number" id="avgHoursPerDay">0</span>
+              <span class="stat-label">Giờ/ngày</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-calendar-week"></i>
+            <div class="stat-info">
+              <span class="stat-number" id="weeklyAverage">0</span>
+              <span class="stat-label">Buổi/tuần</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-percentage"></i>
+            <div class="stat-info">
+              <span class="stat-number" id="attendanceRate">0%</span>
+              <span class="stat-label">Tỷ lệ tham gia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="notificationToast" class="notification-toast">
+    <div class="toast-content">
+      <i class="toast-icon"></i>
+      <span class="toast-message"></span>
+    </div>
+    <button class="toast-close" onclick="hideNotification()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="loading-spinner">
+      <div class="spinner"></div>
+      <p>Đang tải lịch học...</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
